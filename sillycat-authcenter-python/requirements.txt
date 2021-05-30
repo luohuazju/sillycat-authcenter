@@ -5,3 +5,4 @@ uvloop==0.14.0
 httptools==0.1.1
 PyJWT==2.1.0
 pydantic==1.7.4
+psycopg2-binary==2.8.6
