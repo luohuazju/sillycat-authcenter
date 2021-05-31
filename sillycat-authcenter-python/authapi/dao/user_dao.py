@@ -1,5 +1,6 @@
 from authapi.dao.postgre_conn import PostgreConn
 from authapi.model.user_model import User
+from authapi.util.log import logger
 
 
 class UserDAO:
@@ -7,14 +8,16 @@ class UserDAO:
     def __init__(self):
         self.conn = PostgreConn().get_conn()
         cur = self.conn.cursor()
-        cur.execute("""DROP TABLE IF EXISTS authapi_users""")
         cur.execute("""
-            CREATE TABLE 
+            CREATE TABLE IF NOT EXISTS
                 authapi_users(
             id SERIAL PRIMARY KEY, 
             name VARCHAR(255), 
             email VARCHAR(255), 
-            password VARCHAR(255))
+            password VARCHAR(255)) 
+        """)
+        cur.execute("""
+            INSERT INTO authapi_users (name, email, password) VALUES ( 'admin', 'admin@gmail.com', '123456')
         """)
         self.conn.commit()
 
@@ -38,10 +41,11 @@ class UserDAO:
                 email = %s
         """
         cur = self.conn.cursor()
-        cur.execute(query, email)
+        cur.execute(query, (email,))
         row = cur.fetchone()
         if row:
-            return User(row[0], row[1], row[2], row[3])
+            logger.info(row)
+            return User(id=row[0], name=row[1], email=row[2], password=row[3])
         return None
 
     def update_user(self, user):
@@ -66,5 +70,5 @@ class UserDAO:
                 email = %s
         """
         cur = self.conn.cursor()
-        cur.execute(query, email)
+        cur.execute(query, (email,))
         self.conn.commit()

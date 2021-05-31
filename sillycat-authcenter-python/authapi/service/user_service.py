@@ -1,7 +1,8 @@
-from authapi.model.user_model import User
+from authapi.model.user_model import User, LoginUser
 from authapi.service.jwt_service import JwtService
 from authapi.util.log import logger
 from authapi.dao.user_dao import UserDAO
+from authapi.exception.authapi_exception import AuthAPIException
 
 
 class UserService:
@@ -16,16 +17,21 @@ class UserService:
         exist = self.userDAO.get_user(user.email)
         if exist:
             logger.info('email is already used', user.email)
-            raise Exception('email_exist')
+            raise AuthAPIException('email_exist', 'email already exist')
         self.userDAO.create_user(user)
 
-    def validate_user(self, user: User):
+    def get_user(self, email):
+        logger.info('calling get_user ------')
+        logger.info(email)
+        return self.userDAO.get_user(email)
+
+    def validate_user(self, user: LoginUser):
         logger.info('calling  validate_user-------')
         logger.info(user)
         exist = self.userDAO.get_user(user.email)
-        if exist and exist.password == exist.password:
-            return self.jwtService.sign_token(user)
-        raise Exception('email_passport_wrong')
+        if exist and exist.password == user.password:
+            return self.jwtService.sign_token(exist)
+        raise AuthAPIException('email_passport_wrong', 'email or password is wrong')
 
     def logout_user(self, token, user):
         # TODO save the invalid token in DB/Cache for 30 minutes
@@ -38,8 +44,8 @@ class UserService:
         if exist:
             exist.name = user.name
             exist.password = user.password
-            self.userDAO.update_user(exist)
-        raise Exception('user_not_exist')
+            return self.userDAO.update_user(exist)
+        raise AuthAPIException('user_not_exist', 'user not exist')
 
     def delete_user(self, email):
         logger.info('calling delete_user--------')
