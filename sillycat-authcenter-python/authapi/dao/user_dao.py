@@ -1,6 +1,7 @@
 from authapi.dao.postgre_conn import PostgreConn
 from authapi.model.user_model import User
 from authapi.util.log import logger
+from authapi.util.md5_util import generate_md5
 
 
 class UserDAO:
@@ -16,9 +17,6 @@ class UserDAO:
             email VARCHAR(255), 
             password VARCHAR(255)) 
         """)
-        cur.execute("""
-            INSERT INTO authapi_users (name, email, password) VALUES ( 'admin', 'admin@gmail.com', '123456')
-        """)
         self.conn.commit()
 
     def create_user(self, user):
@@ -28,7 +26,7 @@ class UserDAO:
             (name, email, password) VALUES (%s, %s, %s)
         """
         cur = self.conn.cursor()
-        cur.execute(query, (user.name, user.email, user.password))
+        cur.execute(query, (user.name, user.email, generate_md5(user.password)))
         self.conn.commit()
 
     def get_user(self, email):
@@ -59,7 +57,7 @@ class UserDAO:
                 email = %s
         """
         cur = self.conn.cursor()
-        cur.execute(query, (user.name, user.password, user.email))
+        cur.execute(query, (user.name, generate_md5(user.password), user.email))
         self.conn.commit()
 
     def delete_user(self, email):

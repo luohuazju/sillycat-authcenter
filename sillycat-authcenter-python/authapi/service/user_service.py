@@ -3,6 +3,7 @@ from authapi.service.jwt_service import JwtService
 from authapi.util.log import logger
 from authapi.dao.user_dao import UserDAO
 from authapi.exception.authapi_exception import AuthAPIException
+from authapi.util.md5_util import generate_md5
 
 
 class UserService:
@@ -29,7 +30,7 @@ class UserService:
         logger.info('calling  validate_user-------')
         logger.info(user)
         exist = self.userDAO.get_user(user.email)
-        if exist and exist.password == user.password:
+        if exist and exist.password == generate_md5(user.password):
             return self.jwtService.sign_token(exist)
         raise AuthAPIException('email_passport_wrong', 'email or password is wrong')
 
