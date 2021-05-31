@@ -1,4 +1,4 @@
-from authapi.service.user_service import UserService
+from authapi.service.user_service import UserService, JwtService
 from authapi.model.user_model import User
 from authapi.util.log import logger
 from fastapi import APIRouter, FastAPI, Header
@@ -6,6 +6,7 @@ from fastapi import APIRouter, FastAPI, Header
 
 router = APIRouter()
 user_service = UserService()
+jwt_service = JwtService()
 
 
 @router.get("/health")
@@ -27,14 +28,24 @@ async def update_user(user: User, x_token: str = Header(None)):
     logger.info('received put user request request-------')
     logger.info(user)
     logger.info(x_token)
-    return {"status": 'OK'}
+    decoded = jwt_service.verify_token(x_token)
+    if decoded:
+        user_service.update_user(user)
+        return {"status": 'OK'}
+    else:
+        return {"status": 'ERROR', "msg": 'Permission not allowed'}
 
 
 @router.delete("/users")
 async def delete_user(x_token: str = Header(None)):
     logger.info('received delete user request request-------')
     logger.info(x_token)
-    return {"status": 'OK'}
+    decoded = jwt_service.verify_token(x_token)
+    if decoded:
+        user_service.delete_user(decoded.email)
+        return {"status": 'OK'}
+    else:
+        return {"status": 'ERROR', "msg": 'Permission not allowed'}
 
 
 @router.post("/login")
@@ -42,14 +53,19 @@ async def login(user: User):
     logger.info('received login post request request-------')
     logger.info(user)
     token = user_service.validate_user(user)
-    return {"status": 'OK', "token": token}
+    return {"status": 'OK', "token": token, "user": user}
 
 
 @router.get("/logout")
 async def logout(x_token: str = Header(None)):
     logger.info('received logout post request request-------')
     logger.info(x_token)
-    return {"status": 'OK'}
+    decoded = jwt_service.verify_token(x_token)
+    if decoded:
+        user_service.logout_user(x_token, decoded)
+        return {"status": 'OK'}
+    else:
+        return {"status": 'ERROR', "msg": 'Permission not allowed'}
 
 
 app = FastAPI()
