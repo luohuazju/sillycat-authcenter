@@ -9,7 +9,7 @@ class _PostgreConn:
 
     def get_conn(self):
         try:
-            self.conn = psycopg2.connect(host="localhost", port="5432", database='postgres', user='postgres',
+            self.conn = psycopg2.connect(host="postgres", port="5432", database='postgres', user='postgres',
                                    password='123456')
             self.postgre_connected = True
             return self.conn
