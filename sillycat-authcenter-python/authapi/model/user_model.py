@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 
 class User(BaseModel):
@@ -7,6 +8,12 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+
+
+class UserToken(BaseModel):
+    name: str
+    email: str
+    expiredAt: datetime
 
 
 class LoginUser(BaseModel):

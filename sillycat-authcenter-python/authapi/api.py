@@ -55,6 +55,7 @@ async def get(x_token: str = Header(None)):
     logger.info(x_token)
     decoded = jwt_service.verify_token(x_token)
     if decoded:
+        logger.info(decoded)
         user = user_service.get_user(decoded['email'])
         return {"status": 'OK', "user": user}
     else:

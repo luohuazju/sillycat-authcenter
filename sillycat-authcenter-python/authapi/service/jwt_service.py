@@ -2,6 +2,8 @@ import jwt
 from authapi.util.log import logger
 from fastapi.encoders import jsonable_encoder
 from authapi.exception.authapi_exception import AuthAPIException
+from datetime import datetime, timedelta
+from authapi.model.user_model import UserToken, User
 
 
 class JwtService:
@@ -14,10 +16,11 @@ class JwtService:
         self.private_key = raw_private_key.encode('ascii')
         self.public_key = raw_public_key.encode('ascii')
 
-    def sign_token(self, payload):
+    def sign_token(self, payload: User):
         logger.info("sign payload is -------")
         logger.info(payload)
-        json_payload = jsonable_encoder(payload)
+        json_payload = jsonable_encoder(
+            UserToken(name=payload.name, email=payload.email, expiredAt=datetime.now() + timedelta(hours=24)))
         return jwt.encode(json_payload, self.private_key, algorithm='RS256')
 
     def verify_token(self, token):
