@@ -13,7 +13,6 @@ class User(BaseModel):
 class UserToken(BaseModel):
     name: str
     email: str
-    expiredAt: datetime
 
 
 class LoginUser(BaseModel):

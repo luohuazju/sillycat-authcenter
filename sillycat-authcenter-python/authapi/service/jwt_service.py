@@ -20,7 +20,8 @@ class JwtService:
         logger.info("sign payload is -------")
         logger.info(payload)
         json_payload = jsonable_encoder(
-            UserToken(name=payload.name, email=payload.email, expiredAt=datetime.now() + timedelta(hours=24)))
+            UserToken(name=payload.name, email=payload.email))
+        json_payload["exp"] = datetime.utcnow() + timedelta(hours=24)
         return jwt.encode(json_payload, self.private_key, algorithm='RS256')
 
     def verify_token(self, token):
