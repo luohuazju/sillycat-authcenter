@@ -1,1 +1,1 @@
-connexion==2.7.0
+connexion==2.9.0
