@@ -41,8 +41,6 @@ paths:
     get:
       summary: hello world
       operationId: authapi.hello.hello
-      parameters:
-      - $ref: "#/components/parameters/JwtHeader"
       responses:
         '200':
           description: say hello
@@ -51,21 +49,11 @@ paths:
               schema:
                 type: string
       security:
-        - jwt: ['secret']
+        - jwtAuth: []
 
 components:
-  parameters:
-    JwtHeader:
-      name: Authorization
-      description: Some message
-      in: header
-      required: true
-      example: Bearer
-      schema:
-        type: string
-
   securitySchemes:
-    jwt:
+    jwtAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
@@ -79,7 +67,7 @@ components:
       properties:
         username:
           type: string
-          example: username
+          example: admin
         password:
           type: string
           example: password
