@@ -41,6 +41,14 @@ paths:
     get:
       summary: hello world
       operationId: authapi.hello.hello
+      parameters:
+      - name: Authorization
+        description: Some message
+        in: header
+        required: true
+        example: token
+        schema:
+          type: string
       responses:
         '200':
           description: say hello
