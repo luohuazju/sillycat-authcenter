@@ -18,4 +18,7 @@ python app.py
  * Debug mode: off
  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
 ```
-
+Command to check the yaml
+```shell
+openapi-spec-validator openapi/auth_api.yaml
+```
