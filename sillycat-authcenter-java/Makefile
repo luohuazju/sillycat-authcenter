@@ -12,3 +12,15 @@ app-run:
 	 -XX:HeapDumpPath="/tmp/dump_oom.hprof" \
 	 -jar ./target/sillycat-authcenter-java-*.jar
 
+build:
+	docker build -f Dockerfile -t $(NAME):$(TAG) .
+
+run:
+	docker run -d --network host --name $(NAME) $(NAME):$(TAG)
+	
+debug:
+	docker run -ti --network host --name $(NAME) $(NAME):$(TAG) /bin/bash
+
+clean:
+	docker stop $(NAME)
+	docker rm $(NAME)
