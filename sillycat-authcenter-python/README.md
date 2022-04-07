@@ -44,6 +44,10 @@ make clean
 If the AuthAPI and database docker containers are all running fine, visit this swagger pages for testing and demo
 http://localhost:8000/docs#
 
+JSON file is here
+
+http://localhost:8000/openapi.json
+
 
 ## Description
 
