@@ -1,0 +1,13 @@
+server:
+  address: localhost
+  port: 9527
+  servlet:
+    context-path: /authcenter
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sillycatauthcenterjava
+springdoc:
+  api-docs:
+    path: /v1/api-docs
