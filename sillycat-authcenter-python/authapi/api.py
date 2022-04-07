@@ -2,6 +2,7 @@ from authapi.service.user_service import UserService, JwtService
 from authapi.model.user_model import User, LoginUser
 from authapi.util.log import logger
 from fastapi import APIRouter, FastAPI, Header, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from authapi.exception.authapi_exception import AuthAPIException
 
@@ -83,7 +84,15 @@ async def logout(x_token: str = Header(None)):
 
 
 app = FastAPI()
+origins = ["*"]
 app.include_router(router, prefix="/api/v1")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(AuthAPIException)
