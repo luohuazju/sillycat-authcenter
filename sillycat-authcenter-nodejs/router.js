@@ -56,7 +56,51 @@ router.get('/api/v1/ping', pingController.ping);
  *         description: Successfully created
  */
 router.post('/api/v1/accounts', accountController.add);
+/**
+ * @swagger
+ * /api/v1/accounts/{id}:
+ *   put:
+ *     tags:
+ *       - account
+ *     description: Updates a single account
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Account's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: account
+ *         description: Account object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Account'
+ *     responses:
+ *       200:
+ *         description: Successfully updated
+ */
 router.put('/api/v1/accounts/:id', accountController.update);
+/**
+ * @swagger
+ * /api/v1/accounts/{id}:
+ *   delete:
+ *     tags:
+ *       - account
+ *     description: Deletes a single account
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Account's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: Successfully deleted
+ */
 router.delete('/api/v1/accounts/:id', accountController.delete);
 /**
  * @swagger
@@ -74,6 +118,27 @@ router.delete('/api/v1/accounts/:id', accountController.delete);
  *           $ref: '#/definitions/Account'
  */
 router.get('/api/v1/accounts', accountController.query);
+/**
+ * @swagger
+ * /api/accounts/{id}:
+ *   get:
+ *     tags:
+ *       - account
+ *     description: Returns a single Account
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: account's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: A single Account
+ *         schema:
+ *           $ref: '#/definitions/Account'
+ */
 router.get('/api/v1/accounts/:id', accountController.get);
 
 module.exports = router;
