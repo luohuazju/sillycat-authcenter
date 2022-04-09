@@ -5,6 +5,7 @@ class AccountController {
 		const body = req.body;
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
+        res.send(body);
         return ;
     }
     
@@ -13,6 +14,7 @@ class AccountController {
 	    const body = req.body;
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
+        res.send(body);
         return ;
     }
 
@@ -21,6 +23,7 @@ class AccountController {
 	    const body = req.body;
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
+        res.send(body);
         return ;
     }
 
@@ -29,6 +32,7 @@ class AccountController {
 	    const body = req.body;
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
+        res.send("{}");
         return ;
     }
 
@@ -37,6 +41,7 @@ class AccountController {
 	    const body = req.body;
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
+        res.send("{}");
         return ;
     }
 
