@@ -44,13 +44,12 @@ router.get('/api/v1/ping', pingController.ping);
  *     description: Create a new Account
  *     produces:
  *       - application/json
- *     parameters:
- *       - name: account
- *         description: Account Object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Account'
+ *     requestBody:
+ *       description: account payload
+ *       content:
+ *         'application/json':
+ *           schema:
+ *             $ref: '#/definitions/Account'
  *     responses:
  *       200:
  *         description: Successfully created
@@ -71,12 +70,12 @@ router.post('/api/v1/accounts', accountController.add);
  *         in: path
  *         required: true
  *         type: integer
- *       - name: account
- *         description: Account object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Account'
+ *     requestBody:
+ *       description: account payload
+ *       content:
+ *         'application/json':
+ *           schema:
+ *             $ref: '#/definitions/Account'
  *     responses:
  *       200:
  *         description: Successfully updated
@@ -120,7 +119,7 @@ router.delete('/api/v1/accounts/:id', accountController.delete);
 router.get('/api/v1/accounts', accountController.query);
 /**
  * @swagger
- * /api/accounts/{id}:
+ * /api/v1/accounts/{id}:
  *   get:
  *     tags:
  *       - account
