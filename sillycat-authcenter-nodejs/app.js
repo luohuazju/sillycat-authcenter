@@ -4,24 +4,26 @@ const logger = require('morgan');
 const errorHandler = require('errorhandler');
 const expressStatusMonitor = require('express-status-monitor');
 const router = require('./router');
+const setSwagger = require('./swagger');
 
 (async() => {
     /**
      * Create Express server.
      */
     const app = express();
-    
+
     /**
      * Express configuration.
      */
     app.set('host', process.env.HOST || '0.0.0.0');
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 8088);
     app.use(expressStatusMonitor());
     app.use(logger('dev'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     
     app.use('/', router);
+    setSwagger(app);
     
     /**
      * Error Handler.

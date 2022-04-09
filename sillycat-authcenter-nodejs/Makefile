@@ -8,11 +8,14 @@ docker-context:
 build: docker-context
 	docker build -t $(REPOSITORY)/$(IMAGE):$(TAG) .
 
+run-app:
+	npm start
+
 run:
-	docker run -d -p 8021:80 -e NODE_ENV=production -v /etc/hosts:/etc/hosts --name $(NAME) $(REPOSITORY)/$(IMAGE):$(TAG)
+	docker run -d -p 8021:8088 -e NODE_ENV=production -v /etc/hosts:/etc/hosts --name $(NAME) $(REPOSITORY)/$(IMAGE):$(TAG)
 
 debug:
-	docker run -ti -p 8021:80 -e NODE_ENV=development -v /etc/hosts:/etc/hosts --name $(NAME) $(REPOSITORY)/$(IMAGE):$(TAG) /bin/bash
+	docker run -ti -p 8021:8088 -e NODE_ENV=development -v /etc/hosts:/etc/hosts --name $(NAME) $(REPOSITORY)/$(IMAGE):$(TAG) /bin/bash
 
 clean:
 	docker stop ${NAME}

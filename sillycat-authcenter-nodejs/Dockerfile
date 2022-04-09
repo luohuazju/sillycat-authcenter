@@ -6,5 +6,5 @@ RUN npm install --production
 
 FROM node:16.0.0-alpine
 COPY --from=build /app /
-EXPOSE 80
+EXPOSE 8088
 CMD ["npm","start"]

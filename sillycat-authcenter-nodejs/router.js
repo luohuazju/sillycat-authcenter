@@ -10,6 +10,18 @@ const pingController = new PingController();
 const accountController = new AccountController();
 //routing configuration
 var router = express.Router();
+/**
+ * @swagger
+ * /api/v1/ping:
+ *   get:
+ *     tags:
+ *       - ping
+ *     summary: ping dong
+ *     description: ping dong health check
+ *     responses:
+ *       200:
+ *         description: return dong
+ */
 router.get('/api/v1/ping', pingController.ping);
 router.post('/api/v1/accounts', accountController.add);
 router.put('/api/v1/accounts/:id', accountController.update);
