@@ -39,10 +39,10 @@ class AccountController {
     async get(req, res){
         const params = req.params;
 	    const body = req.body;
-        const auth = req.headers['Authorization']; 
+        const header = req.headers; 
         console.log("params = " + JSON.stringify(params));
         console.log("body = " + JSON.stringify(body));
-        console.log("auth = " + auth);
+        console.log("header = " +  JSON.stringify(header));
         res.send("{}");
         return ;
     }

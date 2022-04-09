@@ -26,6 +26,7 @@ var router = express.Router();
  * @swagger
  * /api/v1/ping:
  *   get:
+ *     security: []
  *     tags:
  *       - ping
  *     summary: ping dong
@@ -121,6 +122,8 @@ router.get('/api/v1/accounts', accountController.query);
  * @swagger
  * /api/v1/accounts/{id}:
  *   get:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - account
  *     description: Returns a single Account

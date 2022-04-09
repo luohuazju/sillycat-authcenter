@@ -4,16 +4,29 @@ const path = require("path");
 
 function setSwagger(app) {
     const options = {
-        definition: {
-            openapi: '3.0.3',
+        swaggerDefinition: {
+            openapi: '3.0.1', // YOU NEED THIS
             info: {
-                title: 'Auth Center Page',
-                version: '1.0.0',
+              title: 'Your API title',
+              version: '1.0.0',
+              description: 'Your API description'
+            },
+            basePath: '/',
+            components: {
+              securitySchemes: {
+                bearerAuth: {
+                  type: 'http',
+                  scheme: 'bearer',
+                  bearerFormat: 'JWT',
+                }
+              }
             }
-        },
-        //swagger-jsdoc scan directory
-        apis: [ path.join(__dirname, './*.js') ]
-    }
+            //security: [{
+            //  bearerAuth: []
+            //}]
+          },
+          apis: ['./*.js'],
+    };
     const swaggerSpec = swaggerJSDoc(options);
 
     app.get('/swagger.json', function(req, res) {
