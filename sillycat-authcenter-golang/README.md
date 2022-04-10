@@ -15,3 +15,7 @@ go build -o bin/sillycat-authcenter-golang -v ./
 ```
 swag init
 ```
+
+### swagger pages
+
+http://localhost:8080/docs/index.html#/
