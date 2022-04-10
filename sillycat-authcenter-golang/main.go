@@ -4,6 +4,7 @@ import (
 	"log"
 	"sillycat-authcenter-golang/config"
 	_ "sillycat-authcenter-golang/docs"
+	"sillycat-authcenter-golang/health"
 	"sillycat-authcenter-golang/user"
 
 	swaggerFiles "github.com/swaggo/files"
@@ -35,11 +36,9 @@ func SetupRouter() *gin.Engine {
 	}
 	router := gin.Default()
 
-	// Ping test
-	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	router.GET("/ping", health.Ping)
 	v1 := router.Group("api/v1")
 	{
 		v1.GET("/users", user.GetAllUsers)
