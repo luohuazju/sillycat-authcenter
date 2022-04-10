@@ -24,6 +24,7 @@ func Ping(c *gin.Context) {
 // @ID health
 // @Produce json
 // @Success 200
+// @Security APIKeyAuth
 // @Router /health [get]
 func Health(c *gin.Context) {
 	token := c.Request.Header["Authorization"]
