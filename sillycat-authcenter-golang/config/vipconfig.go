@@ -12,6 +12,7 @@ const appName = "config"
 
 func InitViperConfig() {
 	log.Println("Start to init the config--------")
+	log.Println(os.Getenv("ENVIRONMENT"))
 	viper.SetDefault("http.port", "8080")
 
 	if os.Getenv("ENVIRONMENT") == "PROD" {
