@@ -16,4 +16,5 @@ FROM scratch
 COPY ./conf /conf
 COPY --from=builder /build/sillycat-authcenter-golang /
 COPY --from=builder /build/docs /
+ENV ENVIRONMENT=PROD
 ENTRYPOINT ["/sillycat-authcenter-golang"]

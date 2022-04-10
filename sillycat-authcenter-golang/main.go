@@ -24,9 +24,6 @@ import (
 
 // @license.name MIT
 // @license.url https://opensource.org/licenses/MIT
-
-// @host localhost:8080
-// @BasePath /
 func SetupRouter() *gin.Engine {
 	if viper.GetBool("gin.debug") {
 		log.Println("Gin is under debug mode")
