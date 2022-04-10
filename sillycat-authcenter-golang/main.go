@@ -3,12 +3,29 @@ package main
 import (
 	"log"
 	"sillycat-authcenter-golang/config"
+	_ "sillycat-authcenter-golang/docs"
 	"sillycat-authcenter-golang/user"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
+// @title AuthCenter Golang API
+// @version 1.0
+// @description This is AuthCenter Golang API
+
+// @contact.name API Support
+// @contact.url https://sillycat.iteye.com
+// @contact.email luohuazju@gmail.com
+
+// @license.name MIT
+// @license.url https://opensource.org/licenses/MIT
+
+// @host localhost:8080
+// @BasePath /
 func SetupRouter() *gin.Engine {
 	if viper.GetBool("gin.debug") {
 		log.Println("Gin is under debug mode")
@@ -22,7 +39,7 @@ func SetupRouter() *gin.Engine {
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
-
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	v1 := router.Group("api/v1")
 	{
 		v1.GET("/users", user.GetAllUsers)
