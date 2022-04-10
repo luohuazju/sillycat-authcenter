@@ -6,5 +6,14 @@ ENV GO111MODULE=on \
     GOARCH=amd64
 
 WORKDIR /build
-COPY go.mod .
-COPY go.sum .
+COPY . .
+RUN go mod download
+RUN go get github.com/swaggo/swag/cmd/swag
+RUN swag init
+RUN go build -o sillycat-authcenter-golang -v ./
+
+FROM scratch
+COPY ./conf /conf
+COPY --from=builder /build/sillycat-authcenter-golang /
+COPY --from=builder /build/docs /
+ENTRYPOINT ["/sillycat-authcenter-golang"]

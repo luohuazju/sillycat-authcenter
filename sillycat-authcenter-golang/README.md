@@ -19,3 +19,9 @@ swag init
 ### swagger pages
 
 http://localhost:8080/docs/index.html#/
+
+### clean the <none>
+
+```
+docker rmi $(docker images | grep "<none>" | awk "{print \$3}")
+```
