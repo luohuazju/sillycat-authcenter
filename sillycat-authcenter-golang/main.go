@@ -36,6 +36,7 @@ func SetupRouter() *gin.Engine {
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.GET("/ping", health.Ping)
+	router.GET("/health", health.Health)
 	v1 := router.Group("api/v1")
 	{
 		v1.GET("/users", user.GetAllUsers)

@@ -19,3 +19,18 @@ func Ping(c *gin.Context) {
 	r := Message{"Dong"}
 	c.JSON(http.StatusOK, r)
 }
+
+// @Summary health health check
+// @ID health
+// @Produce json
+// @Success 200
+// @Router /health [get]
+func Health(c *gin.Context) {
+	token := c.Request.Header["Authorization"]
+	tokenStr := "Dong"
+	if token != nil {
+		tokenStr = token[0]
+	}
+	r := Message{tokenStr}
+	c.JSON(http.StatusOK, r)
+}
