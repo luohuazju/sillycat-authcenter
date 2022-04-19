@@ -1,3 +1,7 @@
+sillycat-authcenter-kotlin/gradlew*
+sillycat-authcenter-kotlin/.gradle
+sillycat-authcenter-kotlin/.idea
+sillycat-authcenter-kotlin/build
 sillycat-authcenter-golang/docs/
 sillycat-authcenter-golang/bin/
 sillycat-authcenter-nodejs/node_modules/
