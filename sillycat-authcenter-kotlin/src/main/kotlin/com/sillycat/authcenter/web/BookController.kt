@@ -9,11 +9,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
+import mu.KotlinLogging
 import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/api/v1/books")
 class BookController(private val bookService: BookService) {
+
+    private val logger = KotlinLogging.logger {}
 
     @GetMapping
     fun index(): List<Book> = bookService.getAllBooks()
@@ -25,7 +29,8 @@ class BookController(private val bookService: BookService) {
         ]
     )
     @PostMapping
-    fun post(@RequestBody book: Book): ResponseEntity<Unit> {
+    fun post(@RequestBody book: Book, @RequestHeader("Authentication") authentication: String): ResponseEntity<Unit> {
+        logger.info("authentication = $authentication")
         bookService.createBook(book)
         return ResponseEntity.accepted().build()
     }

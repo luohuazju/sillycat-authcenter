@@ -24,6 +24,7 @@ dependencies {
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.springdoc:springdoc-openapi-data-rest:1.6.7")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.7")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
