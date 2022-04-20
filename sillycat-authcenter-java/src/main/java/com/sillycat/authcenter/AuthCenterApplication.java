@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.extern.slf4j.Slf4j;
 
-@OpenAPIDefinition(servers = { @Server(url = "/authcenter", description = "Default Server URL") })
+@OpenAPIDefinition(
+		servers = { 
+				@Server(url = "/authcenter", description = "Default Server URL") })
 @SpringBootApplication
 @Slf4j
 public class AuthCenterApplication {
