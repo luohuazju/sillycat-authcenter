@@ -18,7 +18,7 @@ run:
 	docker run -d -p 8001:8001 --name $(NAME) $(NAME):$(TAG)
 
 run-prod:
-	docker run -d -p 8001:9000 --env RUN_ENV=prod --name $(NAME) $(NAME):$(TAG)
+	docker run -d -p 8025:9000 --env RUN_ENV=prod --name $(NAME) $(NAME):$(TAG)
 
 clean:
 	docker stop $(NAME)
