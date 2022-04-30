@@ -1,7 +1,7 @@
 Feature: Create and Read persons ...
 
   Background:
-    * url baseUrl = 'http://localhost:9527/authcenter'
+    * url baseUrl
     * def userBase = '/users/'
 
   Scenario: Create a user
