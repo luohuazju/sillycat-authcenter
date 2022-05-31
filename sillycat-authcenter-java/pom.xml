@@ -6,7 +6,7 @@
 	<groupId>com.sillycat</groupId>
 	<artifactId>sillycat-authcenter-java</artifactId>
 	<version>1.0.0</version>
-	<name>Auth Center</name>
+	<name>sillycat-authcenter-java</name>
 	<description>Provide an Auth Center</description>
 
 	<parent>
