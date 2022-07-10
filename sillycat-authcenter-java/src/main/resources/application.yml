@@ -11,3 +11,14 @@ spring:
 springdoc:
   api-docs:
     path: /v1/api-docs
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - prometheus
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: MonitoringAuthCenter 

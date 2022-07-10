@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sillycat.authcenter.model.User;
 
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,6 +31,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserController {
 	
+	Counter getUserByIDCounter;
+	
+	public UserController(MeterRegistry registry) {
+		getUserByIDCounter = Counter.builder("users_getuserbyid")
+            .description("Users getUserByID called count")
+            .register(registry);
+    }
 	
 	@Operation(summary = "Get a User by its id")
 	@ApiResponses(value = {
@@ -39,6 +49,7 @@ public class UserController {
 	public User findByID(@RequestHeader("Authentication") String authToken, @PathVariable Long id) {
 		log.info("findbyId get path variable id = " + id);
 		log.info("authToken = " + authToken);
+		getUserByIDCounter.increment();
 		User item = new User();
 		item.setId(Long.valueOf(1));
 		item.setLoginName("luohuazju");
@@ -46,6 +57,7 @@ public class UserController {
 		return item;
 	}
 
+	@Timed(value = "users.lists", description = "Time taken to list users")
 	@GetMapping("/")
 	public List<User> findUsers() {
 		User item1 = new User();
