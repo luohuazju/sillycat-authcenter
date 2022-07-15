@@ -37,19 +37,14 @@ public class AuthCenterApplication {
         centerConfig.addTrustedInterface("192.168.56.3");
         centerConfig.setScriptingEnabled(true);
         Config config = new Config()
-                .setInstanceName("hazelcast-instance")
+                .setInstanceName("laprocluster")
                 .setManagementCenterConfig(centerConfig);
         
         NetworkConfig network = config.getNetworkConfig();
         network.setPort(5701).setPortAutoIncrement(false);
         network.setPortAutoIncrement(true);
         JoinConfig join = network.getJoin();
-        join.getMulticastConfig().setEnabled(false);
-        join.getTcpIpConfig()
-        .addMember("192.168.56.3")
-        .addMember("192.168.56.4")
-        .addMember("192.168.56.5")
-        .setEnabled(true);
+        join.getMulticastConfig().setEnabled(true);
         return config;
     }
 	
