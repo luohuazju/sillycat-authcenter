@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.hazelcast.config.Config;
+import com.hazelcast.config.ManagementCenterConfig;
+
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -25,6 +28,17 @@ public class AuthCenterApplication {
 		log.info("SpringBootOpenAPIApplication started! ");
 
 	}
+	
+	@Bean
+    public Config hazelCastConfig() {
+        ManagementCenterConfig centerConfig = new ManagementCenterConfig();
+        centerConfig.addTrustedInterface("192.168.56.3");
+        centerConfig.setScriptingEnabled(true);
+        return new Config()
+                .setInstanceName("hazelcast-instance")
+                .setManagementCenterConfig(centerConfig);
+    }
+	
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
