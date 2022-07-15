@@ -7,7 +7,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 import com.hazelcast.config.ManagementCenterConfig;
+import com.hazelcast.config.NetworkConfig;
 
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -34,9 +36,17 @@ public class AuthCenterApplication {
         ManagementCenterConfig centerConfig = new ManagementCenterConfig();
         centerConfig.addTrustedInterface("192.168.56.3");
         centerConfig.setScriptingEnabled(true);
-        return new Config()
+        Config config = new Config()
                 .setInstanceName("hazelcast-instance")
                 .setManagementCenterConfig(centerConfig);
+        
+        NetworkConfig network = config.getNetworkConfig();
+        network.setPort(5701).setPortCount(20);
+        network.setPortAutoIncrement(true);
+        JoinConfig join = network.getJoin();
+        join.getMulticastConfig().setEnabled(false);
+        join.getTcpIpConfig().addMember("192.168.56.4").setEnabled(true);
+        return config;
     }
 	
 
