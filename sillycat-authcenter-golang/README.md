@@ -25,3 +25,13 @@ http://localhost:8080/docs/index.html#/
 ```
 docker rmi $(docker images | grep "<none>" | awk "{print \$3}")
 ```
+
+### Possible commands
+
+```
+go install github.com/swaggo/swag/cmd/swag@latest
+
+go mod tidy
+
+go mod tidy -compat=1.17
+```
