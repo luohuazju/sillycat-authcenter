@@ -3,41 +3,40 @@
     "version": "1.0.0",
     "description": "A starter for Node.js web applications",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/luohuazju/sillycat-authcenter.git"
+        "type": "git",
+        "url": "https://github.com/luohuazju/sillycat-authcenter.git"
     },
     "license": "MIT",
     "author": "Yiyi Kang & Carl Luo",
     "contributors": [
-      "Carl Luo (https://github.com/luohuazju)"
+        "Carl Luo (https://github.com/luohuazju)"
     ],
     "scripts": {
-      "start": "node app.js"
+        "start": "node app.js"
     },
     "dependencies": {
-      "body-parser": "^1.20.0",
-      "errorhandler": "^1.5.1",
-      "express": "^4.17.3",
-      "express-status-monitor": "^1.3.4",
-      "swagger-jsdoc": "6.2.0",
-      "swagger-ui-express": "4.3.0",
-      "lodash": "^4.17.21",
-      "morgan": "^1.10.0",
-      "npm": "^8.6.0",
-      "handlebars": ">=4.7.7"
+        "body-parser": "^1.20.0",
+        "errorhandler": "^1.5.1",
+        "express": "^4.17.3",
+        "express-status-monitor": "^1.3.4",
+        "handlebars": ">=4.7.7",
+        "lodash": "^4.17.21",
+        "morgan": "^1.10.0",
+        "npm": "^8.6.0",
+        "swagger-jsdoc": "6.2.0",
+        "swagger-ui-express": "4.3.0"
     },
     "devDependencies": {
-      "dotenv": "^16.0.0",
-      "eslint": "^8.13.0",
-      "mocha": "^9.2.2",
-      "nanoid": ">=3.3.2",
-      "nyc": "^15.1.0",
-      "sinon": "^13.0.1",
-      "supertest": "^6.2.2"
+        "dotenv": "^16.0.0",
+        "eslint": "^8.13.0",
+        "mocha": "^9.2.2",
+        "nanoid": ">=3.3.2",
+        "nyc": "^15.1.0",
+        "sinon": "^13.0.1",
+        "supertest": "^6.2.2"
     },
     "engines": {
-      "node": ">=16.0.0",
-      "npm": ">=8.6.0"
+        "node": ">=16.0.0",
+        "npm": ">=8.6.0"
     }
-  }
-  
+}
