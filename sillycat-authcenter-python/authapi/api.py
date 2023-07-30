@@ -1,14 +1,18 @@
 from authapi.service.user_service import UserService, JwtService
+from authapi.service.consul_service import ConsulService
 from authapi.model.user_model import User, LoginUser
 from authapi.util.log import logger
 from fastapi import APIRouter, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from authapi.exception.authapi_exception import AuthAPIException
+import asyncio
+
 
 router = APIRouter()
 user_service = UserService()
 jwt_service = JwtService()
+consul_service = ConsulService()
 
 
 @router.get("/health")
@@ -93,6 +97,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+async def startup_event():
+    logger.info('app start here --------------')
+    asyncio.create_task(consul_service.monitor_consul())
 
 
 @app.exception_handler(AuthAPIException)
