@@ -11,6 +11,16 @@ swagger docs --> FastAPI RESTful --> PostgresSQL
 ## how to run
 If you have docker on your machine and make command on your machine.
 Command to start a simple postgres 
+
+here is how the running requirements
+
+```shell
+export CONSUL_USER=username
+export CONSUL_PASSWORD='password'
+export CONSUL_HOST=https://xxx.xxx.io
+```
+
+
 ```shell
 make run-db
 ```
