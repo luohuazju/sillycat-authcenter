@@ -1,0 +1,10 @@
+######### START CONTENTS: ${SOURCE_DIR}/venv/.gitignore #########
+# created by virtualenv automatically
+*
+######### END CONTENTS: ${SOURCE_DIR}/venv/.gitignore #########
+
+######### START CONTENTS: ASH_INCLUSIONS #########
+.git
+**/cdk.out/asset.*
+!**/*.template.json
+######### END CONTENTS: ASH_INCLUSIONS #########
