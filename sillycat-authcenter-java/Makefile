@@ -4,6 +4,12 @@ NAME=sillycat-authcenter-java
 app-build:
 	mvn clean package -Dmaven.test.skip
 
+app-build-jar:
+	mvn clean package -Dmaven.test.skip -Dpackaging=jar
+
+app-build-war:
+	mvn clean package -Dmaven.test.skip -Dpackaging=war
+
 app-run:
 	java -Djava.net.preferIPv4Stack=true \
 	 -Dspring.profiles.active=stage \
