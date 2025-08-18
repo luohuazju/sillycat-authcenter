@@ -1,0 +1,25 @@
+{
+    "listeners": {
+        "*:9527": {
+            "pass": "applications/sillycat-authcenter"
+        }
+    },
+    "applications": {
+        "sillycat-authcenter": {
+            "type": "java",
+            "webapp": "/Users/carl/unit-java-apps/sillycat-authcenter-java-1.0.0.war",
+            "environment": {
+                "JAVA_HOME": "/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home"
+            },
+            "options": [
+                "-Djava.net.preferIPv4Stack=true",
+                "-Dspring.profiles.active=stage",
+                "-Dserver.port=9527",
+                "-Dserver.address=0.0.0.0",
+                "-XX:MaxMetaspaceSize=256M",
+                "-XX:+HeapDumpOnOutOfMemoryError",
+                "-XX:HeapDumpPath=/tmp/dump_oom.hprof"
+            ]
+        }
+    }
+}
