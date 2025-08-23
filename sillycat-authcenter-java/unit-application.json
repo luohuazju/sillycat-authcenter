@@ -1,0 +1,14 @@
+{
+    "type": "java",
+    "webapp": "/Users/carl/unit-java-apps/sillycat-authcenter-java-1.0.0.war",
+    "environment": {
+        "JAVA_HOME": "/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home"
+    },
+    "options": [
+        "-Djava.net.preferIPv4Stack=true",
+        "-Dspring.profiles.active=stage",
+        "-XX:MaxMetaspaceSize=256M",
+        "-XX:+HeapDumpOnOutOfMemoryError",
+        "-XX:HeapDumpPath=/tmp/dump_oom.hprof"
+    ]
+}
