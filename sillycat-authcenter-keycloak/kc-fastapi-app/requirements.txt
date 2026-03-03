@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+authlib
+starlette[full]
+python-dotenv
+itsdangerous
