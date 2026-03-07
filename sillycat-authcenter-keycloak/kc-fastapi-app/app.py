@@ -25,6 +25,8 @@ if not OIDC_CLIENT_SECRET:
     print("⚠️ OIDC_CLIENT_SECRET is empty. If your Keycloak client uses Client Authentication (confidential), set the secret.")
 
 app = FastAPI()
+# SessionMiddleware 仍然需要，因为 authlib 的 OAuth 流程需要用它来存储临时的 state 数据
+# 但我们不用它来存储用户登录信息，而是用独立的签名 cookie
 app.add_middleware(
     SessionMiddleware, 
     secret_key=APP_SECRET, 
@@ -34,7 +36,7 @@ app.add_middleware(
     session_cookie="session"  # 明确指定 cookie 名称
 )
 
-# 用于签名 cookie 的序列化器
+# 用于签名 cookie 的序列化器（用于存储用户登录信息）
 serializer = URLSafeTimedSerializer(APP_SECRET)
 
 def get_user_from_cookie(request: Request):
@@ -137,7 +139,7 @@ async def protected(request: Request):
 
 @app.get("/logout")
 async def logout(request: Request):
-    # 清除本地会话和 cookie
+    # 清除 OAuth session 和用户 cookie
     request.session.clear()
     response = RedirectResponse("/")
     response.delete_cookie("user_data")
